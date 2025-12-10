@@ -2,7 +2,6 @@
  Implements a simple HTTP/1.0 Server
 
 """
-
 import socket
 import os  
 
@@ -16,7 +15,7 @@ server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server_socket.bind((SERVER_HOST, SERVER_PORT))
 server_socket.listen(1)
 print('Listening on port %s ...' % SERVER_PORT)
-
+print('Open http://localhost:%s in your browser' % SERVER_PORT)
 while True:
     # Wait for client connections
     client_connection, client_address = server_socket.accept()
@@ -51,6 +50,12 @@ while True:
 
     # Send HTTP response
     client_connection.sendall(response.encode())
+    #Reload on file changes
+    event_handler = AnyFileChanges()
+    observer = Observer()
+    observer.schedule(event_handler, path='htdocs/', recursive=True)
+    observer.start()
+    # Close client connection
     client_connection.close()
 
 # Close socket

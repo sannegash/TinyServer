@@ -3,8 +3,15 @@
     <title>Hello World</title>
 </head>
 <body>
-    <h1>Hello World!</h1>
+    <h1>what World!</h1>
     <p>Welcome to the index.html web page..</p>
     <p>Here's a link to <a href="ipsum.html">Ipsum</a></p>
+    <button id="mybutton">Click me</button>   
+    <script src="script.js"> </script>
+    <script> 
+        //Event listener for button 
+        const btn = document.getElementById("mybutton");
+        btn.addEventListener("click", myFunction);
+    </script>
 </body>
 </html>
